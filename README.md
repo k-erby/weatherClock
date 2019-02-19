@@ -30,3 +30,10 @@ now
 ```
 
 It'll then serve it on a random url and you're good to go.
+
+## Dependencies
+
+```bash
+npm i -s axios
+npm install express node-fetch && npm install --save-dev nodemon
+```

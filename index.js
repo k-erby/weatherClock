@@ -1,24 +1,25 @@
-// Part of the zeit-script to get it running
-module.exports = (req, res) => {
-	  res.end(`Basic weather clock server stuff`);
-}
+const axios = require('axios');
+const express = require('express');
 
-const request = require('request');
+const app = express();
+const port = 4000;
 
-// Grab apiKey from bash/zsh
 let apiKey = process.env.WEATHER_API;
 let cityID = '6174041';
 
-// Default temp is set to Kelvin, so you have to add the conversion to metric
-let url = `http://api.openweathermap.org/data/2.5/weather?id=${cityID}&units=metric&appid=${apiKey}`;
+async function getWeather() {
+    // Default temp is set to Kelvin, so you have to add the conversion to metric
+    let apiUrl = `http://api.openweathermap.org/data/2.5/weather?id=${cityID}&units=metric&appid=${apiKey}`;
+    let weather;
 
-request(url, function (err, response, body) {
-  if (err) {
-    console.log('error:', error);
-  } else {
-    let weather = JSON.parse(body)
-    let message = `It is ${weather.main.temp} degrees in ${weather.name}!`;
+    const response = await axios.get(apiUrl);
+    return response;
+}
 
-    console.log(message);
-  }
+app.get("/", (req, res) => {
+  getWeather()
+    .then(weather => { console.log(weather.data); })
+    .catch(error => { console.log(error) });
 });
+
+const server = app.listen(port);
