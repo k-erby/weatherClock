@@ -4,6 +4,7 @@ const express = require('express');
 const app = express();
 const port = 4000;
 
+// TODO: this will result in 'undefined' when deployed, so fix that.
 let apiKey = process.env.WEATHER_API;
 let cityID = '6174041';
 
@@ -13,12 +14,13 @@ async function getWeather() {
     let weather;
 
     const response = await axios.get(apiUrl);
-    return response;
+    return response.data;
 }
 
+// TODO: zeit is still unhappy with this and throws a 502.
 app.get("/", (req, res) => {
   getWeather()
-    .then(weather => { console.log(weather.data); })
+    .then(weather => { console.log(weather); })
     .catch(error => { console.log(error) });
 });
 
