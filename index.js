@@ -1,5 +1,5 @@
-const axios = require('axios');
 const express = require('express');
+const fetch = require("node-fetch");
 
 const app = express();
 const port = 4000;
@@ -13,15 +13,21 @@ async function getWeather() {
     let apiUrl = `http://api.openweathermap.org/data/2.5/weather?id=${cityID}&units=metric&appid=${apiKey}`;
     let weather;
 
-    const response = await axios.get(apiUrl);
-    return response.data;
+    const response = await fetch(apiUrl);
+    return response.json();
 }
 
 // TODO: zeit is still unhappy with this and throws a 502.
 app.get("/", (req, res) => {
-  getWeather()
-    .then(weather => { console.log(weather); })
-    .catch(error => { console.log(error) });
+  getWeather().then(weather => {
+    res.json(weather);
+  });
 });
+
+//app.get("/", (req, res) => {
+//  getWeather()
+//    .then(weather => { console.log(weather); })
+//    .catch(error => { console.log("Butts") });
+//});
 
 const server = app.listen(port);
