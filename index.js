@@ -1,11 +1,13 @@
+// .env is needed; add var open_weather_secret=apiKeySecret
+if (!process.env.now) { require("dotenv").config(); }
+
 const express = require('express');
 const axios = require('axios');
 
 const app = express();
-const port = 4000;
+const port = process.env.now ? 8080 : 4000;
 
-// TODO: this will result in 'undefined' when deployed, so fix that.
-let apiKey = process.env.WEATHER_API;
+let apiKey = process.env.open_weather_secret;
 let cityID = '6174041';
 let weather;
 
@@ -25,10 +27,9 @@ const getCurrentLocalWeather = async () => {
   }
 }
 
-// TODO: zeit is still unhappy with this and throws a 502.
 app.get("/", (req, res) => {
   getCurrentLocalWeather().then(weatherData => {
-    res.send(weatherData.main)
+    res.send(weatherData);
   })
 });
 

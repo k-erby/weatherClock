@@ -3,37 +3,41 @@
 
 ## Installation
 
-You'll need `zeit` for the serverless NodeJS portion. Download the Now CLI via npm:
+You'll need `zeit Now` for the serverless NodeJS portion. Download the Now CLI via npm:
 
 ```bash
 npm i -g now
-```
-
-Check it's installed by running:
-
-```bash
-now help
-```
-
-Login to the CLI via:
-
-```bash
-now login
+now help        // test this command worked
+now login       // login to the CLI
 ```
 
 ## Usage
 
-Run the project through the command:
+To run this project, you'll need to grab an API key from OpenWeatherMaps. This uses 
+the ['Current Weather' data API.](https://openweathermap.org/api)
 
-```bash
-now
+You'll need to create a `.env` file at the root of this directory. Add your api key to it:
+```text
+open_weather_secret=API_KEY
 ```
 
-It'll then serve it on a random url and you're good to go.
-
-## Dependencies
-
+For deployment, you'll need to add your api key to `now` as well. To do this:
 ```bash
-npm i -s axios
-npm install express node-fetch && npm install --save-dev nodemon
+now secret add open_weather_secret API_KEY
 ```
+ 
+For local access at `localhost:4000` run:
+```bash
+npm run start
+```
+
+For deployment, run:
+```bash
+now -e open_weather_secret=@open_weather_secret
+```
+
+The project will be deployed and reachable at the specified url in the console.
+
+## What was used
+
+Axios, express, nodemon, zeit Now
