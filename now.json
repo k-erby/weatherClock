@@ -5,5 +5,10 @@
       "src": "*.js",
       "use": "@now/node-server"
     }
-  ]
+  ],
+  "build": {
+    "env": {
+      "open_weather_secret": "@open_weather_secret"
+    }
+  }
 }
