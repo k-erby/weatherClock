@@ -1,12 +1,12 @@
 const express = require('express');
-var api = require('./src/api');
+var parser = require('./src/parser');
 
 const app = express();
 const port = process.env.now ? 8080 : 4000;
 
 app.get("/", (req, res) => {
-  api.getCurrentLocalWeather().then(weatherData => {
-    res.send(weatherData);
+  parser.getWeather().then(weatherConfig => {
+    res.send(weatherConfig);
   })
 });
 
