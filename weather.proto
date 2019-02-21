@@ -1,0 +1,7 @@
+message WeatherMessage {
+  required string main = 1;
+  required double temp = 2;
+  required int32 humidity = 3;
+  required int32 cloudPercentage = 4;
+  required int32 rainAmount = 5;
+}
