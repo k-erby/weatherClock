@@ -31,8 +31,6 @@ module.exports = {
       weatherConfig.rainAmount = 0;
     }
 
-    let something;
-    something = formatter.formatProtobuf(weatherConfig);
-    return something;
+    return formatter.formatProtobuf(weatherConfig);
   }
 }
