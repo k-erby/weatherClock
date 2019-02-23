@@ -8,7 +8,6 @@ let mainWeatherInfo;
 const weatherConfig = {
   main: "",
   temp: 0,
-  humidity: 0,
   cloudPercentage: 0,
   rainAmount: 0
 };
@@ -22,7 +21,6 @@ module.exports = {
 
     weatherConfig.main = mainWeatherInfo.main;
     weatherConfig.temp = normWeather.main.temp;
-    weatherConfig.humidity = normWeather.main.humidity;
     weatherConfig.cloudPercentage = normWeather.clouds.all;
 
     // Rain isn't consistently stored in the JSON we get from the api, so wrap interacting with
