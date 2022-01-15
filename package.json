@@ -18,7 +18,7 @@
   },
   "homepage": "https://github.com/k-erby/weatherClock#readme",
   "dependencies": {
-    "axios": "^0.18.0",
+    "axios": "^0.21.2",
     "express": "^4.16.4",
     "protocol-buffers": "^4.1.0"
   },
